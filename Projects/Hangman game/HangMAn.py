@@ -12,6 +12,7 @@ time.sleep(1)
 print("The Game is loading...")
 time.sleep(1)
 print("Lets Play The Game\n")
+time.sleep(1)
 
 
 # Initialize useful variables
@@ -25,7 +26,7 @@ def main():
     global already_guessed
     global play
 
-    words_to_select = ["hola", "delhi", "april", "mice", "coma", "lite", "fun"]
+    words_to_select = ["hola", "delhi", "april", "mice", "coma", "lite", "fun", "funny", "hello", "umbrella"]
     word = random.choice(words_to_select)
     length = len(word)
     count = 0
@@ -53,7 +54,7 @@ def game_body() -> object:
     global word
     global already_guessed
     limit = 5
-    guess = input(f"This Is Computers guess {display} Enter Your Guess.")
+    guess = input(f"This Is Computers guess {display} Enter Your Guess.\n")
     guess = guess.strip()
     if len(guess.strip()) == 0 or len(guess.strip()) >= 2 or guess <= "9":
         print("Invalid Input, Please Try A Letter.\n")
@@ -61,10 +62,13 @@ def game_body() -> object:
 
     elif guess in word:
         already_guessed.extend([guess])
-        index_of_guess = word.find(guess)
-        display = display[:index_of_guess] + guess + display[index_of_guess + 1:]
-        word = word[:index_of_guess] + '_' + word[index_of_guess + 1:]
-        print(display)
+
+        for index, item in enumerate(word):
+            if item == guess:
+                index_of_guess = index
+                display = display[:index_of_guess] + guess + display[index_of_guess + 1:]
+                word = word[:index_of_guess] + '_' + word[index_of_guess + 1:]
+                print(display + "\n")
 
     elif guess in already_guessed:
         print("Already Entered Try Another Letter.\n")
