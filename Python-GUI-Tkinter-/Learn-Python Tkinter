@@ -1,0 +1,463 @@
+			********** Tkinter References ************
+
+
+			-----Basic Syntax of tkinter GUI------
+
+#Import Tkinter Below Line imports all available things in Tinker
+from tkinter import *
+
+#Then We need to create root (class instance of TK())
+root = TK()
+
+#Give required geometry to the GUI and GUI data, Logic .....
+root.geometry("300x340")
+Label(root, text="iam a lebel")
+
+#Start a event loop
+root.mainloop()
+
+root.resizable(0, 0) #Locks default window screen
+
+
+
+
+
+				------Geometry------
+
+#TO set Gui size we can use..
+
+root.geometry("width x height")
+-> root.geometry("300x300") #This creates GUI window of 300*300
+
+root.minsize(width, height) #This sets minimum size of GUI, user cannot reduce lower than this size
+-> root.minsize(300, 400)
+
+root.maxsize(height, weight) #This sets maximum size of GUI, user cannot increase GUI more than this size
+-> root.maxsize(200, 450)
+
+
+
+
+
+
+
+
+				------Label In Tkinter-----
+
+#Basic syntax of label...
+label_test = Label(text="Hello Welcome to python")
+label_test.pack()
+
+#We can also use above syntax as ....
+Label(root, text="Hello Welcome to python").pack()
+Label(text="Hello Welcome to python").pack()
+
+			------ Packing Elements ------
+
+#We can pack elements by using these functions 
+> pack()  # Its attributes are down below
+> grid(row=0, column=0)  # It takes two elements row and column
+> place(x=0, y=0)  #Takes Two parameters x and y values
+
+
+
+
+
+
+
+
+
+			------Insert images in GUI---------
+
+#For .Png Format...
+photo = PhotoImage(file="my.png") #Here my.png is name of image file
+photo_label = Label(image=photo)
+photo_label.pack()
+
+#For .jpg or other format...
+#Tkinter Doesnt support .jpg and other formats so we need to import PIL module to insert images...
+from PIL import Image, ImageTk
+
+photo = Image.open("1.jpg")
+img = ImageTk.PhotoImage(photo)
+photo_label = Label(image=img)
+photo_label.pack()
+
+#We can use upper code as...
+photo = ImageTk.PhotoImage(Image.open("1.jpg"))
+Label(root, image=photo).pack()
+
+#Resize Image
+photo = Image.open("1.jpg")
+photo= photo.resize((200, 120))
+	above two or
+photo = Image.open("1.jpg").resize((200, 200), Image.ANTIALIAS) #Image.ANTIALIAS Removes Bluriness not compulsary to use
+img = ImageTk.PhotoImage(photo)
+
+
+
+
+
+
+
+
+
+
+			------ Attributes Of Label And pack---------
+#--[Label]--
+test_label = Label(root, text="Testing", bg="gray", fg="black", font="lucida 19 bold", pady=120, padx=50, borderwidth=5, relief=SUNKEN)
+
+#Points
+> text = used For Background text
+> bg = For background color
+> fg = For foreground color
+> font = To give font to the text
+> padx = It gives padding on X to the text
+> pady = It gives padding on Y to the text
+> relief = It is used to give border type(SUNKEN, RAISED, GROOVE, RIDGE)
+> borderwidth = It is used to give border a width
+
+#--[Pack]--
+test_label.pack(anchor="sw", side=BOTTOM, fill=X, padx=30, pady=37)
+
+#Points
+> anchor = Direction is given and places towards given direction(e, w, s, n, se, sw, nw, ne...)
+> side = the side where its needed(BOTTOM, LEFT, TOP, RIGHT)
+> fill = fills towards the direction where its given(X, Y)
+> padx = Padding on x to the whole box
+> pady = padding on y to the whole box
+
+***Note***
+Padx and pady on label is for the elements which are inside the label and in pack is for whole label
+
+
+
+
+
+
+
+
+
+
+			-----Frame-----
+#Frames are containers or say a box in which we can put other things, its like <div> in html
+test_frame = Frame(root, borderwidth=6, bg="pink")
+test_frame.pack(side=LEFT, fill=Y)
+
+#Put label inside frames
+test_frame = Frame(root, borderwidth=6, bg="pink")
+test_label = Label(test_frame, text="Testing", bg="gray", fg="black", font="lucida 9 bold", pady=2, padx=5, borderwidth=5,relief=SUNKEN)
+test_label.pack(anchor="sw", side=BOTTOM, pady=13)
+test_frame.pack(side=LEFT, fill=Y)
+
+
+
+
+
+
+
+
+			----- Button ----
+
+#Button Are Clickable Elements WE all Know buttons
+test_button = Button(master, attributes) >Here master is where we want to put button (root, Frame..)
+test_button.pack()
+
+#Consider we have to put button inside frame
+test_button = Button(test_frame, fg="red", bg="yellow", text="Test Button", command=myFunc)
+test_button.pack()
+
+#Button have command attribute which takes name of function to be executed
+
+
+
+
+
+
+
+
+			------ Entry Widget -------
+			
+#Entry widget is used to take user value from GUI its like <input> tag in Html
+#To use Entry widget we first need to know about variable class in tkinter
+---Variable classes
+>IntVar
+>BooleanVar
+>StringVar
+>DoubleVar
+
+#How to Implement This..
+test_var = StringVar()
+test_var_entry = Entry(root, textvariable=test_var)
+test_var_entry.grid()
+
+#When we assigned textvariable attr. to StringVar The user given input will be stored into asssigned variable.
+#In this case test_var is the var. where value will be stored to retrive that value we have to use test_var.get()
+
+*** Check Button is also a entry widget syntsx:
+
+test_checkBox = IntVar()
+test_checkbox_entry = Checkbutton(text="Check The box if you want this iten too", textvariable=test_checkBox).grid()
+
+#CheckButton With Button And function
+
+def printFun():
+    print(f"value is {test_checkBox.get()}")
+    
+test_checkBox = IntVar()
+test_checkbox_entry = Checkbutton(text="Check The box if you want this item too", variable=test_checkBox)
+test_checkbox_entry.grid()
+Button(root, text="Click", command=printFun).grid()
+
+> it Returns 1 when CheckBox is checcked else: returns 0
+
+
+
+
+
+
+
+
+			----- Canvas Widget ------
+
+
+#Canvas widget helps to make different geometric shapes 
+test_canvas = Canvas(root, width=300, height=400)
+test_canvas.create_line(0, 4, 120, 140, fill="red")
+test_canvas.pack()
+
+#The above one creates the line the given paramaters are the cordinates of two points inorder (x1, y1, x2, y2)
+#We can create other geometric shapes too
+>create_text
+> create_rectangle
+>create_oval
+
+
+
+
+
+
+
+			----- Listen Events --------
+			
+#There is no use of GUI if it doest do any events so the events listining is needed...
+#some events..
+1. <Button-1> 
+2. <Enter> #When Mouse cursor enters widget
+3. <Leave> #When Mouse cursor leaves widget
+4. <Double-1> #Double click event
+
+#Syntax:
+test_btn_widget = Button(root, text="Click Me")
+test_btn_widget.pack()
+test_btn_widget.bind("<Button-1>", myFunc)
+
+#While creating myFunc it should have to take one default argument which is passed internally by tkinter and that argument is event.
+def myFunc(event):
+	print(f"x: cor.. {event.x}, and y: cord.. {event.y}")
+
+
+#> Here event.x and event.y returns the value of x and y position of clicked widget
+
+
+
+
+
+
+
+
+
+
+			------ Menu In Tkinter GUI --------
+
+#Step By Step For Making Menu
+
+#First Create Menu Bar Which may be horizontal or vertical with one or more Menu Items Such as files, edit, help etc..
+menuBar = Menu(root)
+
+#Now Configure the menu this will make menu visible we can do it at last too(after adding menu elements)
+root.config(menu=menuBar)
+
+#create Menu item/s And put dropdown items inside main menu item i.e the horizontal/vertical menu 
+menu_item_file = Menu(menuBar, tearoff=0) #Here Tearoff is that makes drop down menu separate
+
+#Add Dropdown items using .add_command
+menu_item_file.add_command(label="Save File", command=myFunc)
+menu_item_file.add_command(label="Save File As", command=myFunc)
+
+menu_item_file.add_separator() #THis draws a separator line
+
+menu_item_file.add_command(label="Open", command=myFunc)
+menu_item_file.add_command(label="Open Folder", command=myFunc)
+
+#Finally Put that dropdown menu with name inside mainmenu 
+menuBar.add_cascade(label="Files", menu=menu_item_file)
+
+
+
+
+
+
+
+
+
+			------- Message box, Notice box ------
+			
+#We all have seen that sometimes we get a box having some message while clicking on a button lets see hoe tu do same in python
+
+#First all of we need to import Tkinter.messagebox
+import tkinter.messagebox as tmsg
+
+#Function That Is used by menu element and shows the info box
+def myFunc():
+    tmsg.showinfo("Info", "I am A Information") #here showinfo shows information box it takes title and message as argument
+
+
+menuBar = Menu(root)
+root.config(menu=menuBar)
+menu_item_file = Menu(menuBar, tearoff=0)
+menu_item_file.add_command(label="Save File", command=myFunc)
+menuBar.add_cascade(label="Files", menu=menu_item_file)
+
+#Some Other Boxes
+> tmsg.showinfo("Info", "I am A Information")
+> tmsg.askquestion("Title", "Question")
+> tmsg.showerror("TITle", "Error Msg")
+> tmsg.askretrycancel("Title", "message")
+> tmsg.askyesnocancel("Title", "click any one")
+> tmsg.showwarning("title", "warning!!!1")
+> tmsg._show("Title", "Show msg")
+
+
+
+
+
+
+
+
+			----- Slider Using Scale Widget ------
+
+#Syntax:
+test_slider = Scale(root, from_=0, to=100, orient=HORIZONTAL, tickinterval=40)
+test_slider.set(23)
+test_slider.pack()
+
+#In Above tickinterval is used to help choosing value in wanted interval / multiple
+#.set(number) function sets the slider initially at wanted position
+
+
+
+
+
+
+
+			------- CheckButton ----
+			
+#Creating Of CheckButton
+
+test_var = IntVar() #we can create stringvar and give value in string form but integer is recommanded
+
+#Set(n) makes the nth checkbutton deafult checked
+test_var.set(2)
+test_radBtn = Radiobutton(root, text="Item-1", variable=test_var, value=1).pack()
+test_radBtn1 = Radiobutton(root, text="Item-1", variable=test_var, value=2).pack()
+test_radBtn2 = Radiobutton(root, text="Item-1", variable=test_var, value=3).pack()
+
+
+
+
+
+
+
+
+			------ ListBox -----
+			
+#lets Create Listbox
+test_list_box = Listbox(root)
+test_list_box.insert(END, "List Data")
+test_list_box.pack()
+
+#when we use the insert(ACTIVE, "Data") then this function will insert the element data before the selected element
+
+
+
+
+
+
+
+			------ ScrollBar -----
+			
+#To Make a scrollbar there are two conditions tobe applied
+1-> widget(yscrollcommand = scrollbar.set) #here scrollbar = Scrollbar(root).pack()
+2-> scrollbar.config(command = widget.yview)
+
+#Demo First create scroll bar and set position and fill
+scrollbar = Scrollbar(root)
+scrollbar.pack(fill=Y, side=RIGHT)
+
+#Create Widget For whom you want to make scrollbar
+test_list_box = Listbox(root, yscrollcommand=scrollbar.set)
+
+#create some lines code to fill screen youn can type lines manually
+for i in range(200):
+    test_list_box.insert(END, f"List Data {i}")
+test_list_box.pack()
+
+#Configure scrollbar to make it full functional
+scrollbar.config(command=test_list_box.yview)
+
+
+
+
+
+
+
+			------ Text Widget ---------
+
+#First create scrollbar and position it
+scrollbar = Scrollbar(root)
+scrollbar.pack(fill=Y, side=RIGHT)
+
+#Create a text widget
+test_text_widget = Text(root, yscrollcommand=scrollbar.set)
+test_text_widget.pack(fill=BOTH)
+scrollbar.config(command=test_text_widget.yview)
+
+
+
+
+
+
+			------ StatusBar -----
+#We can create status bar with the help of label, classvariables and functions
+There is no default widget to create the status bar
+
+
+
+
+
+
+
+			------ Tips -------
+			
+#To change default tkinter icon
+root.wm_iconbitmap("Image.ico")
+
+
+#Change The Background of the GUI
+root.configure(background="gray")
+
+
+
+#TO get System width and height(resolution)
+width = root.winfo_screenwidth()
+height = root.winfo_screenheight()
+print(f"{width}x{height}")
+
+
+
+
+*NOTE: IT IS ALWAYS RECOMMENDED TO USE OOPS FOR COMPLEX GUI DESIGN
+
+
+
