@@ -26,7 +26,8 @@ def main():
     global already_guessed
     global play
 
-    words_to_select = ["hola", "delhi", "april", "mice", "coma", "lite", "fun", "funny", "hello", "umbrella"]
+    words_to_select = ["hola", "delhi", "april", "mice",
+                       "coma", "lite", "fun", "funny", "hello", "umbrella"]
     word = random.choice(words_to_select)
     length = len(word)
     count = 0
@@ -66,7 +67,8 @@ def game_body() -> object:
         for index, item in enumerate(word):
             if item == guess:
                 index_of_guess = index
-                display = display[:index_of_guess] + guess + display[index_of_guess + 1:]
+                display = display[:index_of_guess] + \
+                    guess + display[index_of_guess + 1:]
                 word = word[:index_of_guess] + '_' + word[index_of_guess + 1:]
                 print(display + "\n")
 
@@ -84,7 +86,8 @@ def game_body() -> object:
                   "|    \n"
                   "|    \n"
                   "|    \n")
-            print(f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
+            print(
+                f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
 
         elif count == 2:
             time.sleep(1)
@@ -94,7 +97,8 @@ def game_body() -> object:
                   "|    \n"
                   "|    \n"
                   "|    \n")
-            print(f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
+            print(
+                f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
 
         elif count == 3:
             time.sleep(1)
@@ -104,7 +108,8 @@ def game_body() -> object:
                   "|    \n"
                   "|    \n"
                   "|    \n")
-            print(f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
+            print(
+                f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
 
         elif count == 4:
             time.sleep(1)
@@ -114,7 +119,8 @@ def game_body() -> object:
                   "|    O \n"
                   "|    \n"
                   "|    \n")
-            print(f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
+            print(
+                f"This Guess IS Wrong. Number Of Chance left: {limit - count}. Try Again..\n")
 
         elif count == 5:
             time.sleep(1)
